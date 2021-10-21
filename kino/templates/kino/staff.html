@@ -1,0 +1,40 @@
+{%extends "kino/base.html"%}
+{% load crispy_forms_tags%}
+{%block content%}
+        <h1>STAFF</h1>
+        <br><br>
+        <h4>Projekcija sa najvise prodanih karata ({{max.broj_prodanih_karata}}): {{max}}</h4>
+        <h4>Projekcija sa najmanje prodanih karata ({{min.broj_prodanih_karata}}): {{min}}</h4>
+        <h4>User sa najvise kupljenih karata({{max_tickets}}): {{user_with_most_tickets}}</h4> 
+        <h4>Projekcija sa prodanih karata > 2</h4>
+        {% for proj in mmm %}
+            {{proj.ime_filma}}, <br>
+        {%endfor%}
+        <h4> Staff users:</h4>
+        {% for staff in staff_list %}
+            {{staff.username}}, <br>
+        {%endfor%}
+    {% for proj in projekcije %}
+        <form>
+            {% csrf_token %}
+            <fieldset class = "form-group">
+                {{form.as_p}}
+            </fieldset>
+            <h1>ime filma: <input type = text value = "{{proj.ime_filma}}" readonly></h1>
+            <p>vrijeme filma <input type = text value = "{{proj.vrijeme_filma}}" readonly></p>
+            <p>kapacitet dvorane: <input type = text value = "{{proj.kapacitet_dvorane}}" readonly></p>
+            <p>Broj prodanih karata: <input type = text value = "{{proj.broj_prodanih_karata}}" readonly></p>
+            <p><input type = hidden value = "{{proj.id}}" readonly></p>
+            <h3>korisnici koji su kupili ovu kartu:</h3><br>
+            
+        {% for ticket in lst%}
+            {%if ticket.projekcija == proj%}
+                {{ticket.user.username}},
+            {%endif%}
+        {%endfor%}
+        
+        </form>
+        <br><br>
+        
+    {% endfor %}
+{%endblock content%}

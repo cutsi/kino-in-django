@@ -1,0 +1,28 @@
+{%extends "kino/base.html"%}
+{% load crispy_forms_tags%}
+{%block content%} 
+    <h2>projekcije sa kapacitetom 18</h2> 
+    <form>
+        {%for proj in projekcije%}
+            {{proj}}<br>
+        {%endfor%}
+
+    </form>
+    <h2>user sa x karata</h2>
+    {%for ticket in users_with_x_tickets%}
+        {{ticket.user}}<br>
+    {%endfor%}
+    <h2>projekcija sa x sjedalom</h2>
+    {%for ticket in projections_with_x_tickets%}
+        {{ticket.projekcija.ime_filma}}<br>
+    {%endfor%}
+
+    <h2>projekcija sa kapacitetom vecim od {{cap}}</h2>
+    {%for proj in projections_with_greater_than_x_capacity%}
+        {{proj.ime_filma}}<br>
+    {%endfor%}
+    <h2>useri bez staff privilegija:</h2>
+    {%for user in list_users%}
+        {{user.username}}<br>
+    {%endfor%}
+{%endblock content%}

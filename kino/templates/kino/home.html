@@ -1,0 +1,24 @@
+{%extends "kino/base.html"%}
+{% load crispy_forms_tags%}
+{%block content%}
+        <h1>HOME</h1>
+        {% for proj in projekcije %}
+        <form method = "POST">
+            {% csrf_token %}
+            <fieldset class = "form-group">
+                {{form.as_p}}
+            </fieldset>
+            <h1>ime filma: <input type = text value = "{{proj.ime_filma}}" name = ime_filma readonly></h1>
+            <p>vrijeme filma <input type = text value = "{{proj.vrijeme_filma}}" readonly></p>
+            <p>kapacitet dvorane: <input type = text value = "{{proj.kapacitet_dvorane}}" name = kapacitet readonly></p>
+            
+            <p><input type = hidden value = "{{proj.id}}" name = proj_id readonly></p>
+            {% if user.is_authenticated %}
+                <p>Broj sjedala: <input type = text name = "broj_sjedala" ></p>
+                <input type="submit" class="btn" value="BUY" name="mybtn">
+            {%endif%}
+        </form>
+        <br><br>
+        
+    {% endfor %}
+{%endblock content%}

@@ -1,0 +1,17 @@
+{%extends "kino/base.html"%}
+{% load crispy_forms_tags%}
+{%block content%} 
+    <h1>{{ user.username }}</h1> 
+    <br>
+    <h2>My tickets:</h2> 
+    <br><br>
+    {% for ticket in tickets %}
+    {% csrf_token %}
+        ime filma: {{ticket.projekcija.ime_filma}}
+        <br>
+        broj sjedala: {{ticket.seat_number}}
+        <br>
+        vrijeme prikazivanja: {{ticket.projekcija.vrijeme_filma}}
+        <br><br><br>
+    {%endfor%}
+{%endblock content%}

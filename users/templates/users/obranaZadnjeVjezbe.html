@@ -1,0 +1,14 @@
+{%extends "kino/base.html"%}
+{% load crispy_forms_tags%}
+{%block content%}
+        <h1>OBRANA ZADNJE VJEZBE</h1>
+        {%for usr in najveci_usr1%}
+            {{usr.user.username}}
+        {%endfor%}
+        {%for usr1 in najveci_usr2%}
+            {{usr1.user.username}}
+        {%endfor%}
+        {%for usr2 in najveci_usr3%}
+            {{usr2.user.username}}
+        {%endfor%}
+{%endblock content%}
